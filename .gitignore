@@ -1,0 +1,50 @@
+# --- Terraform ---
+# Local terraform state and plugins
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+*.tfvars
+*.tfvars.json
+
+# --- Java / Maven ---
+target/
+*.class
+*.jar
+*.war
+*.ear
+.mtj.tmp/
+*.orig
+
+# --- IDEs (VS Code / IntelliJ) ---
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+.DS_Store
+
+# --- Kubernetes / Helm ---
+# If you use local kube configs for testing
+.kube/
+charts/*/charts/
+charts/*/tmp/
+
+# --- Logs & OS ---
+*.log
+tmp/
+dist/
+node_modules/
+
+# --- Data Files ---
+*.txt
+*.csv
+*.tsv
+*.zip
+*.gz
+*.7z
+*.rar
+# specific data folder
+data/
+raw_data/
