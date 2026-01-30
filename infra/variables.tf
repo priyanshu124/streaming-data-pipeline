@@ -10,3 +10,9 @@ variable "cluster_name" {
   type        = string
   default     = "ad-bidding-analytics"
 }
+
+variable github_token {
+  description = "GitHub Personal Access Token for ArgoCD"
+  type        = string
+  sensitive   = true
+}

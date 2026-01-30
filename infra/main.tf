@@ -13,4 +13,5 @@ module "minio-s3-storage" {
 
 module argocd {
   source      = "./argocd"
+  github_token = var.github_token
 }
