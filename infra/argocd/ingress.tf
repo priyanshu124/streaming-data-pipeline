@@ -13,6 +13,6 @@ resource "helm_release" "ingress_nginx" {
 
   set {
     name  = "controller.service.type"
-    value = "LoadBalancer" 
+    value = "NodePort" 
   }
 }
