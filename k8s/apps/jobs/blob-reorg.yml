@@ -30,7 +30,7 @@ spec:
             - name: MINIO_SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: minio-credentials
+                  name: minio-creds
                   key: secretkey
             # - name: SOURCE_BUCKET
             #   value: "ad-bidding-analytics-raw-data"
