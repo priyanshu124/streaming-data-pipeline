@@ -11,7 +11,6 @@ spec:
     path: k8s/apps  # This is where we will put our Producer and Kafka UI YAMLs
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: argocd
   syncPolicy:
     automated:
       prune: true
