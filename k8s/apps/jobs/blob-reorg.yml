@@ -28,12 +28,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: minio-creds
-                  key: accesskey
+                  key: rootUser
             - name: MINIO_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   name: minio-creds
-                  key: secretkey
+                  key: rootPassword
             # - name: SOURCE_BUCKET
             #   value: "ad-bidding-analytics-raw-data"
             # - name: TARGET_BUCKET
