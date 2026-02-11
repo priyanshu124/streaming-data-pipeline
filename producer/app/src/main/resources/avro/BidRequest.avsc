@@ -1,0 +1,26 @@
+{
+  "type": "record",
+  "name": "BidRequest",
+  "namespace": "com.ad.analytics.model",
+  "fields": [
+    {"name": "bidId", "type": "string"},
+    {"name": "timestamp", "type": "long"},
+    {"name": "ipinyouId", "type": ["null", "string"], "default": null, "doc": "The internal user ID set by iPinYou"},
+    {"name": "userAgent", "type": ["null", "string"], "default": null, "doc": "device, operation system, and browser of the user"},
+    {"name": "ipAddress", "type": ["null", "string"], "default": null},
+    {"name": "region", "type": ["null", "int"], "default": null},
+    {"name": "city", "type": ["null", "int"], "default": null},
+    {"name": "adExchange", "type": ["null", "int"], "default": null},
+    {"name": "domain", "type": ["null", "string"], "default": null, "doc": "The domain of the hosting webpage of the ad slot. The values were hashed."},
+    {"name": "url", "type": ["null", "string"], "default": null, "doc": "The URL of the hosting webpage of the ad slot. The values were hashed."},
+    {"name": "anonymousURLID", "type": ["null", "string"], "default": null, "doc": "When URL is not directly available to the DSP (e.g. masked by ad exchanges) this column will be used. The values are provided by ad exchanges. For one record, either URL or Anonymous URL ID is meaningful."},
+    {"name": "adSlotID", "type": ["null", "string"], "default": null},
+    {"name": "adSlotWidth", "type": ["null", "float"], "default": null},
+    {"name": "adSlotHeight", "type": ["null", "float"], "default": null},
+    {"name": "adSlotVisibility", "type": ["null", "string"], "default": null, "doc": "The column describes if the ad slot is above the fold (“FirstView”) or not (“SecondView” to “TenthView”), or unknown (“Na”)."},
+    {"name": "adSlotFormat", "type": ["null", "string"], "default": null, "doc": "Possible values include “Fixed” (fixed size and position), “Pop” (the pop-up window), “Background”, “Float”, or NA."},
+    {"name": "adSlotFloorPrice", "type": ["null", "float"], "default": null, "doc": "Floor (or reserve) price of the ad slot. No bid lower than the floor price could win auctions. A linear scale normalisation was applied to this column."},
+    {"name": "creativeID", "type": ["null", "string"], "default": null},
+    {"name": "biddingPrice", "type": ["null", "float"], "default": null, "doc": "The bid price from iPinYou for this bid request. The price unit is RMB/CPM"}
+  ]
+}

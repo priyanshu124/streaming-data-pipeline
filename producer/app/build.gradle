@@ -3,6 +3,7 @@ plugins {
     id 'java'
     //handles the .avsc -> .java conversion
     id "com.github.davidmc24.gradle.plugin.avro" version "1.9.1"
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 repositories {
@@ -11,20 +12,49 @@ repositories {
 }
 
 dependencies {
-    // Kafka & Avro
-    implementation 'org.apache.kafka:kafka-clients:3.5.0'
-    implementation 'io.confluent:kafka-avro-serializer:7.5.0'
+    /* ==============================
+       Kafka
+       ============================== */
+    implementation 'org.apache.kafka:kafka-clients:3.6.1'
+
+    /* ==============================
+       Avro + Schema Registry
+       ============================== */
     implementation 'org.apache.avro:avro:1.11.3'
+    implementation 'io.confluent:kafka-avro-serializer:7.5.1'
+
+    /* ==============================
+       MinIO (S3-compatible storage)
+       ============================== */
+    implementation 'io.minio:minio:8.5.7'
+
+    /* ==============================
+       Compression / File decoding
+       ============================== */
+    implementation 'org.apache.commons:commons-compress:1.26.1'
+
+    /* ==============================
+       CSV / JSON parsing
+       ============================== */
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
+    implementation 'org.apache.commons:commons-csv:1.10.0'
+
+    // Lombok for getters/setters, builders, etc.
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
     
-    // JSON & Logging
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
-    implementation 'org.slf4j:slf4j-simple:2.0.7'
+    /* ==============================
+       Logging (prod standard)
+       ============================== */
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    runtimeOnly 'ch.qos.logback:logback-classic:1.4.14'
+
+    /* ==============================
+       Testing
+       ============================== */
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
 }
 
-// Tell the plugin where your schemas will live
-generateAvroJava {
-    source("src/main/avro")
-}
 
 // Apply a specific Java toolchain to ease working on different environments.
 java {

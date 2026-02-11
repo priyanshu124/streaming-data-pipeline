@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: blob-reorg-job
+  namespace: ad-bidding-analytics-kafka
+  labels:
+    app: blob-reorg
+spec:
+  parallelism: 1
+  completions: 1
+  backoffLimit: 3  # Retry on failure
+  template:
+    metadata:
+      name: blob-reorg
+      labels:
+        app: blob-reorg
+    spec:
+      containers:
+        - name: blob-reorg
+          image: prgupta124/ad-bidding-analytics:blob-reorg-1.0.0
+          imagePullPolicy: Always
+          env:
+            - name: MINIO_ENDPOINT
+              value: "http://minio.minio.svc:9000"
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-creds
+                  key: accesskey
+            - name: MINIO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-credentials
+                  key: secretkey
+            # - name: SOURCE_BUCKET
+            #   value: "ad-bidding-analytics-raw-data"
+            # - name: TARGET_BUCKET
+            #   value: "ad-bidding-analytics"
+      restartPolicy: Never
+      serviceAccountName: blob-reorg-sa
