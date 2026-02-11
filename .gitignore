@@ -15,6 +15,7 @@ target/
 *.ear
 .mtj.tmp/
 *.orig
+build/
 
 # --- IDEs (VS Code / IntelliJ) ---
 .idea/
