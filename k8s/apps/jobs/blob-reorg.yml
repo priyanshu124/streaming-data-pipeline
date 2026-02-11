@@ -5,6 +5,8 @@ metadata:
   namespace: ad-bidding-analytics-kafka
   labels:
     app: blob-reorg
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
 spec:
   parallelism: 1
   completions: 1
@@ -13,7 +15,7 @@ spec:
     metadata:
       name: blob-reorg
       labels:
-        app: blob-reorg
+        app: blob-reorg     
     spec:
       containers:
         - name: blob-reorg
