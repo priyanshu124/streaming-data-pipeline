@@ -11,7 +11,7 @@ rtb:
   organizer:
     source:
       bucket: ${SOURCE_BUCKET:ad-bidding-analytics-raw-data}
-      prefix: ${SOURCE_PREFIX:ipinyou.contest.dataset}
+      prefix: ${SOURCE_PREFIX:ipinyou.contest.dataset/}
     destination:
       bucket: ${DEST_BUCKET:rtb-analytics}
-      prefix: ${DEST_PREFIX:raw-organized}
+      prefix: ${DEST_PREFIX:raw-organized/}

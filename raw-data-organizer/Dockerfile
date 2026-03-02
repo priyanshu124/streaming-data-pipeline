@@ -1,5 +1,5 @@
 # Multi-stage build
-FROM gradle:8.3-jdk17 AS builder
+FROM gradle:8.3-jdk17 as builder
 WORKDIR /build
 COPY build.gradle settings.gradle ./
 COPY gradle gradle
