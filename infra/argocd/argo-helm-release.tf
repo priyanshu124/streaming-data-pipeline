@@ -23,18 +23,18 @@ resource "helm_release" "argocd" {
 
   set {
     name  = "server.ingress.hosts[0]"
-    value = "argocd.local"
+    value = "localhost"
   }
 
-  # Essential for GRPC (CLI/UI) support through NGINX
-  set {
-    name  = "server.ingress.annotations.nginx\\.ingress\\.kubernetes\\.io/ssl-passthrough"
-    value = "true"
-  }
+  # # Essential for GRPC (CLI/UI) support through NGINX
+  # set {
+  #   name  = "server.ingress.annotations.nginx\\.ingress\\.kubernetes\\.io/ssl-passthrough"
+  #   value = "true"
+  # }
 
-  set {
-    name  = "server.ingress.annotations.nginx\\.ingress\\.kubernetes\\.io/backend-protocol"
-    value = "HTTPS"
-  }
+  # set {
+  #   name  = "server.ingress.annotations.nginx\\.ingress\\.kubernetes\\.io/backend-protocol"
+  #   value = "HTTPS"
+  # }
 
 }

@@ -7,24 +7,42 @@
 *.tfvars
 *.tfvars.json
 
-# --- Java / Maven ---
-target/
-*.class
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build outputs
 *.jar
 *.war
 *.ear
-.mtj.tmp/
-*.orig
-build/
+*.zip
+*.tar.gz
 
-# --- IDEs (VS Code / IntelliJ) ---
-.idea/
-*.iml
-.vscode/
-.settings/
-.classpath
-.project
-.DS_Store
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
 
 # --- Kubernetes / Helm ---
 # If you use local kube configs for testing
@@ -49,3 +67,12 @@ node_modules/
 # specific data folder
 data/
 raw_data/
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+*.venv/
+python-venv/
