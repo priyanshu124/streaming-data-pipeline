@@ -1,0 +1,62 @@
+plugins {
+    id 'application'
+    id 'java'
+    id 'org.springframework.boot' version '3.2.0'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    /* ==============================
+       Spring Boot (includes logging)
+       ============================== */
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    /* ==============================
+       MinIO (S3-compatible storage)
+       ============================== */
+    implementation 'io.minio:minio:8.5.7'
+
+    /* ==============================
+       Lombok for builders/getters/setters
+       ============================== */
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+    /* ==============================
+       Testing
+       ============================== */
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+application {
+    mainClass = 'com.rtbplatform.organizer.App'
+}
+
+springBoot {
+    mainClass = 'com.rtbplatform.organizer.App'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks.named('bootJar') {
+    archiveFileName = 'raw-data-organizer.jar'
+}
+
+tasks.named('shadowJar') {
+    archiveFileName = 'raw-data-organizer-all.jar'
+    mergeServiceFiles()
+}

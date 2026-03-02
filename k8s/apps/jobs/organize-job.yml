@@ -1,0 +1,85 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: raw-data-organizer
+  namespace: ad-bidding-analytics-kafka 
+spec:
+  backoffLimit: 2
+  parallelism: 1
+  completions: 1
+  template:
+    metadata:
+      name: raw-data-organizer
+    spec:
+      serviceAccountName: raw-data-organizer
+      containers:
+      - name: organizer
+        image: prgupta124/raw-data-organizer:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: MINIO_ENDPOINT
+          value: http://minio:9000
+        - name: MINIO_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-creds
+              key: access-key
+        - name: MINIO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-creds
+              key: secret-key
+        - name: SOURCE_BUCKET
+          value: ad-bidding-analytics-raw-data
+        - name: SOURCE_PREFIX
+          value: ipinyou.contest.dataset/
+        - name: DEST_BUCKET
+          value: rtb-analytics
+        - name: DEST_PREFIX
+          value: raw-organized/
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+      restartPolicy: Never
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: raw-data-organizer
+  namespace: ad-bidding-analytics-kafka 
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: minio-creds-reader
+  namespace: ad-bidding-analytics-kafka
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  resourceNames: ["minio-creds"]
+  verbs: ["get", "list"]
+
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: minio-creds-reader-role-binding
+  namespace: ad-bidding-analytics-kafka
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+subjects:
+- kind: ServiceAccount
+  name: raw-data-organizer
+  namespace: ad-bidding-analytics-kafka
+roleRef:
+  kind: Role
+  name: minio-creds-reader
+  apiGroup: rbac.authorization.k8s.io
