@@ -23,12 +23,12 @@ spec:
           valueFrom:
             secretKeyRef:
               name: minio-creds
-              key: minio_root_user
+              key: rootUser
         - name: MINIO_SECRET_KEY
           valueFrom:
             secretKeyRef:
               name: minio-creds
-              key: minio_root_password
+              key: rootPassword
         - name: SOURCE_BUCKET
           value: ad-bidding-analytics-raw-data
         - name: SOURCE_PREFIX
