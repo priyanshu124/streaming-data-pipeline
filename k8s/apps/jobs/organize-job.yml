@@ -14,7 +14,7 @@ spec:
       serviceAccountName: raw-data-organizer
       containers:
       - name: organizer
-        image: raw-data-organizer:latest
+        image: prgupta124/raw-data-organizer:latest
         imagePullPolicy: IfNotPresent
         env:
         - name: MINIO_ENDPOINT
