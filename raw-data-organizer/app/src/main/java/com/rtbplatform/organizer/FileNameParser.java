@@ -12,24 +12,33 @@ public class FileNameParser {
 
     /**
      * Parse filename to extract date and log type.
-     * Expected format: logtype.YYYYMMDD.txt
+     * Expected format: logtype.YYYYMMDD.txt or logtype.YYYYMMDD.txt.bz2
      * Example: bid.20130311.txt → date=2013-03-11, logType=BID
+     * Example: bid.20130311.txt.bz2 → date=2013-03-11, logType=BID
      *
      * @param fileName the filename (without path)
      * @return ParsedFileName or null if filename doesn't match expected format
      */
     public ParsedFileName parse(String fileName) {
-        if (!fileName.endsWith(".txt")) {
+        // Remove extension (.txt or .txt.bz2)
+        String baseName;
+        if (fileName.endsWith(".txt.bz2")) {
+            baseName = fileName.replace(".txt.bz2", "");
+        } else if (fileName.endsWith(".txt")) {
+            baseName = fileName.replace(".txt", "");
+        } else {
             return null;
         }
 
-        String[] parts = fileName.replace(".txt", "").split("\\.");
+        String[] parts = baseName.split("\\.");
         if (parts.length != 2) {
             return null;
         }
 
         String logTypeStr = parts[0].toUpperCase();
+        System.out.println("Parsed log type: " + logTypeStr);
         String dateStr = parts[1];
+        System.err.println("Parsed date string: " + dateStr);
 
         // Validate and convert date
         try {

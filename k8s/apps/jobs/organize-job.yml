@@ -15,10 +15,10 @@ spec:
       containers:
       - name: organizer
         image: prgupta124/raw-data-organizer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
         - name: MINIO_ENDPOINT
-          value: http://minio:9000
+          value: http://minio.minio.svc.cluster.local:9000
         - name: MINIO_ACCESS_KEY
           valueFrom:
             secretKeyRef:

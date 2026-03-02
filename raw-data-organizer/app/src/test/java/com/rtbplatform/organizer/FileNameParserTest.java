@@ -18,7 +18,7 @@ class FileNameParserTest {
 
     @Test
     void testParseConvertLogTypeToUppercase() {
-        ParsedFileName result = parser.parse("impression.20231225.txt");
+        ParsedFileName result = parser.parse("impression.20231225.txt.bz2");
         assertEquals("IMPRESSION", result.getLogType());
         assertEquals("2023-12-25", result.getDate());
     }
